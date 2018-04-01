@@ -47,7 +47,7 @@ exports.NewClient = function (req, res) {
 		}
 		res.send(user._id);
 	});
-
+ 
 }
 
 exports.NewMessage = function (req, res) {

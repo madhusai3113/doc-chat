@@ -47,11 +47,11 @@
 		 <!-- side panel -->
 		 <div class="mdl-cell mdl-cell--4-col side-panel" >
 				<div class="mdl-grid header">
-					<div class="mdl-cell mdl-cell--2-col">
+					<!-- <div class="mdl-cell mdl-cell--2-col">
 						<div class="avatar">
 							<img src="https://api.adorable.io/avatars/128/anas.png" />
 						</div>
-					</div>
+					</div> -->
 					<div class="mdl-layout-spacer"></div>
 					<div class="mdl-cell mdl-cell--2-col">
 						<button class="mdl-button mdl-js-button mdl-button--icon" >
@@ -62,11 +62,7 @@
 						<button id="demo-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
 							<i class="material-icons">more_vert</i>
 						</button>
-						<ul ng-if="chatStatus >= 0" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-							<li class="mdl-menu__item"  ng-click="endChat()">end chat</li>
-							<li class="mdl-menu__item">Another Action</li>
-							<li class="mdl-menu__item">Disabled Action</li>
-							<li class="mdl-menu__item">Yet Another Action</li>
+						
 						</ul>
 					</div>
 				</div>
@@ -97,7 +93,7 @@
 								<span class="mdl-list__item-sub-title">click here to initiate the chat</span>
 							</span>
 							<span class="mdl-list__item-secondary-content">
-								<span class="mdl-list__item-secondary-info">5:35</span>
+								<span class="mdl-list__item-secondary-info"></span>
 							</span>
 						</li>
 					
@@ -107,11 +103,16 @@
 		 <!-- end side panel -->
 		<!-- main panel -->
 	<div class="mdl-cell mdl-cell--8-col main-panel">
-		<div class="mdl-grid header">
+		<div class="mdl-grid header hide-class">
 			<div class="mdl-cell mdl-cell--4-col">
 				<span class="mdl-list__item-primary-content">
 					<img class="mdl-list__item-avatar" src="https://api.adorable.io/avatars/128/anas.png" />
-					<span class="title-name">User Fakar</span>
+					<span class="title-name">
+						user
+						<!-- <div ng-repeat="message in prevMessages" id="chat-messages">
+							{{message.sender==0}} => {{message.message}}
+						</div> -->
+					</span>
 				</span>
 			</div>
 		</div>
@@ -130,11 +131,13 @@
 			<div class="mdl-shadow--2dp enter-message">
 				<div class="mdl-grid">
 					<div class="mdl-cell mdl-cell--1-col">
-						<label for="fileicon">
-								<i class="material-icons">attachment</i>
+						<label >
+								<i  class="material-icons">attachment</i>
+								<input type="file" id="fileicon" name="file" ng-model="file" onchange="angular.element(this).scope().uploadFile(this.files)" style="display: none"></input>
 						</label>
-							<input type="file" id="fileicon" ngf-select="upload($file)" style="display: none"></input>
-							
+							<!-- <input type="file" id="fileicon" ng-file-select="onFileSelect($files)" style="display: none"></input> -->
+							<!-- <input type="file" id="fileicon" file-model="myFile"  style="display: none"></input> -->
+
 						</div>
 					<div class="mdl-cell mdl-cell--10-col message-text-container">
 						<input type="text" ng-keyup="$event.keyCode== 13 && sendMessage()"  ng-model="message" id="messagefield" placeholder="Send message" />
@@ -154,13 +157,12 @@
 
 </div>
 
-
 <!-- shim is needed to support non-HTML5 FormData browsers (IE8-9)-->
-<script src="ng-file-upload-shim.min.js"></script>
-<script src="ng-file-upload.min.js"></script>
+<!-- <script src="ng-file-upload-shim.min.js"></script>
+<script src="ng-file-upload.min.js"></script> -->
 
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 	<script src="controllers/controller.js"></script>
 	
     <script type="text/javascript" src="js/app.js?v=<?=time()?>"></script>

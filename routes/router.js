@@ -14,7 +14,14 @@ module.exports = function (app) {
 	app.post('/chat/messages', chat.AllMessages);
 
 
+	app.post('/upload_photos', function (req, res) {
 
+		if (req.method == 'POST') {
+			var jsonString = '';
+
+			console.log("hi");
+		}
+	});
 	
 
 	

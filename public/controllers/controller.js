@@ -1,5 +1,8 @@
 var myapp = angular.module('myApp', []);
 
+
+
+
 myapp.controller('AppController', ['$scope', '$http', function ($scope, $http) {
     console.log('controller taken position');
     
@@ -81,8 +84,74 @@ myapp.controller('AppController', ['$scope', '$http', function ($scope, $http) {
         }
     }
 
+// AutoClick for fileupload
+    // $scope.selectFile = function(){
+    //     $("#fileicon").click();
+    // }
 
+    // UploadFile Function
+    $scope.uploadFile = function(files){
+        $scope.$apply(function($scope) {
+            $scope.theFile = files[0].name;
+            console.log($scope.theFile);
+        });
+
+        var message = JSON.stringify({
+            message: "<a>" +$scope.theFile + "</a>",
+            sender: this.user_id,
+            recipient: 0,
+            userStatus: this.chatStatus
+        });
+        this.socket.emit('chat message', message);
+
+        var fd = new FormData();
+        //Take the first selected file
+        fd.append("file", files[0]);
+
+        uploadFiles(files[0]);
+
+
+        // $http.post("file:///home/madhusai/Desktop/used/node/test/public/fileUpload", fd, {
+        //     withCredentials: true,
+        //     headers: {'Content-Type': undefined },
+        //     transformRequest: angular.identity
+        // }).success().error();
+
+    }
+
+    function uploadFiles(formData) {
+        $.ajax({
+            url: '/upload_photos',
+            method: 'post',
+            data: formData,
+            processData: false,
+            contentType: false,
+            xhr: function () {
+                var xhr = new XMLHttpRequest();
+    
+                // Add progress event listener to the upload.
+                xhr.upload.addEventListener('progress', function (event) {
+                    var progressBar = $('.progress-bar');
+    
+                    if (event.lengthComputable) {
+                        var percent = (event.loaded / event.total) * 100;
+                        progressBar.width(percent + '%');
+    
+                        if (percent === 100) {
+                            progressBar.removeClass('active');
+                        }
+                    }
+                });
+    
+                return xhr;
+            }
+        }).done(handleSuccess).fail(function (xhr, status) {
+            alert(status);
+        });
+    }
 
 
 
 }]);
+
+
